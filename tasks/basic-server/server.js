@@ -11,19 +11,14 @@ const server = http.createServer((req, res) => {
     if (req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
 
+        // The Website should show:
+        //      an element with the id "counter" that displays the current value of the counter.
+        //      a button with the id "increment" that calls the increment function when clicked.
+        //      a button with the id "decrement" that calls the decrement function when clicked.
+        //      a script tag that loads the browser.js file.
+
         res.write(`
-            <html>
-                <head>
-                    <title>Basic Server</title>
-                </head>
-                <body>
-                    <h1>Basic Server</h1>
-                    <p><b>My Counter: </b><span id="counter">${counter}</span></p>
-                    <button id="increment" onclick="increment()">Increment</button>
-                    <button id="decrement" onclick="decrement()">Decrement</button>
-                    <script src="/browser.js"></script>
-                </body>
-            </html>
+            Write your HTML here.
         `);
         res.end();
     } else if (req.url === '/browser.js') {
@@ -34,18 +29,13 @@ const server = http.createServer((req, res) => {
         res.write(browserJs);
         res.end();
     } else if (req.url === '/increment') {
-        counter++;
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.write(`${counter}`);
-        res.end();
+        // Increment the counter and send the new value back to the client as text.
     } else if (req.url === '/decrement') {
-        counter--;
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.write(`${counter}`);
-        res.end();
+        // Decrement the counter and send the new value back to the client as text.
     } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.write('Not Found');
+        // Enter the correct status code and message for a resource that is not found.
+        res.writeHead(___, { 'Content-Type': 'text/plain' });
+        res.write(___);
         res.end();
     }
 });

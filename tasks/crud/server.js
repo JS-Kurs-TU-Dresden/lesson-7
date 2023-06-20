@@ -8,87 +8,59 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 let id = 0;
 const tweets = [];
 
+/**
+ * This function turns a string into drunken case.
+ * @example toDrunkenCase('Hello World') // 'hElLo wOrLd'
+ * @param {string} str The string to turn into drunken case.
+ */
 function toDrunkenCase(str) {
-    let result = '';
-
-    for (let i = 0; i < str.length; i++) {
-        if (Math.random() > 0.5) {
-            result += str[i].toUpperCase();
-        } else {
-            result += str[i].toLowerCase();
-        }
-    }
-
-    return result;
+    // Write your code here so that the case of each letter is randomly upper or lower case.
 }
+
+
+// Fore info on the http module: https://www.w3schools.com/nodejs/nodejs_http.asp
+//                               https://www.tutorialsteacher.com/nodejs/create-nodejs-web-server
+
+// In the case that you feel lost, you can always ask for a hint!
+
+
+
+// Write your code here so that the server handles the following requests:
+//      GET /tweets
+//          Respond with all tweets as JSON.
+//      POST /tweets
+//          Add a new tweet to the tweets array and respond with the new tweet as JSON.
+//      PUT /tweets/:id
+//          Update the tweet with the given id and respond with the updated tweet as JSON.
+//      DELETE /tweets/:id
+//          Delete the tweet with the given id and respond with status code 204.
 
 const server = http.createServer((req, res) => {
 
-    if (req.url === '/tweets' && req.method === 'GET') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify(tweets));
-        res.end();
-    } else if (req.url === '/tweets' && req.method === 'POST') {
-        let body = '';
+    if (req.url === '/tweets' && req.method === ___) {
 
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
+        // Code goes here
 
-        req.on('end', () => {
-            const tweet = JSON.parse(body);
+    } else if (req.url === '/tweets' && req.method === ___) {
 
-            tweet.text = toDrunkenCase(tweet.text);
-            tweet.id = id;
-            id++;
+        // Code goes here
 
-            tweets.push(tweet);
+    } else if (req.url.startsWith('/tweets/') && req.method === ___) {
 
-            res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.write(JSON.stringify(tweet));
-            res.end();
-        });
-    } else if (req.url.startsWith('/tweets/') && req.method === 'PUT') {
-        const parts = req.url.split('/');
-        const id = Number(parts[2]);
+        // Code goes here
 
-        let body = '';
+    } else if (req.url.startsWith('/tweets/') && req.method === ___) {
 
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
-
-        req.on('end', () => {
-            const tweet = JSON.parse(body);
-
-            tweet.text = toDrunkenCase(tweet.text);
-            tweet.id = id;
-
-            const tweetIndex = tweets.findIndex(t => t.id === id);
-
-            tweets[tweetIndex] = tweet;
-
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.write(JSON.stringify(tweet));
-            res.end();
-        });
-    } else if (req.url.startsWith('/tweets/') && req.method === 'DELETE') {
-
-        const parts = req.url.split('/');
-        const id = Number(parts[2]);
-
-        const tweetIndex = tweets.findIndex(t => t.id === id);
-
-        tweets.splice(tweetIndex, 1);
-
-        res.writeHead(204);
-        res.end();
+        // Code goes here
 
     } else {
         handleFiles(req, res);
     }
 })
 
+/**
+ * This function handles all requests for files.
+ */
 function handleFiles(req, res) {
     if (req.url === '/' || req.url === '/index.html') {
         const file = fs.readFileSync(resolve(__dirname, './index.html'), 'utf8');

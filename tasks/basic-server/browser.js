@@ -1,19 +1,15 @@
-console.log('Hello from the browser')
-
+/**
+ * The increment function gets called when the increment button is clicked.
+ */
 function increment() {
-    console.log('incrementing')
-    fetch('/increment')
-        .then(res => res.text())
-        .then(text => {
-            document.getElementById('counter').innerHTML = text;
-        });
+    // Make a fetch request to the server to increment the counter
+    // and update the counter on the page with the returned value.
 }
 
+/**
+ * The decrement function gets called when the decrement button is clicked.
+ */
 function decrement() {
-    console.log('decrementing')
-    fetch('/decrement')
-        .then(res => res.text())
-        .then(text => {
-            document.getElementById('counter').innerHTML = text;
-        });
+    // Make a fetch request to the server to decrement the counter
+    // and update the counter on the page with the returned value.
 }

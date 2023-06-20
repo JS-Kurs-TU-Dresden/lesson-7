@@ -2,22 +2,20 @@
 
 // Create a promise that resolves after a given number of milliseconds
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(function (resolve, reject) {
+        ___
+    });
 }
 
 // Create a promise fails after 1 seconds
 
 function fail() {
-    return new Promise((_, reject) => setTimeout(reject, 1000));
+    return ___
 }
 
 // Write an async function that prints out all numbers from 1 to 10 with a delay of 250 milliseconds between each number
+___ function printNumbers() {
 
-async function printNumbers() {
-    for (let i = 1; i <= 10; i++) {
-        console.log(i);
-        await sleep(250);
-    }
 }
 
 

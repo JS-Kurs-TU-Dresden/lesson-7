@@ -3,13 +3,11 @@
 import fetch from 'node-fetch';
 
 // Fetch the current weather for a given city
+// Use the following API: https://goweather.herokuapp.com/weather/{city}
+// Where {city} is the name of the city you want to get the weather for.
 
 async function getWeatherIn(city) {
-    const response = await fetch(
-        `https://goweather.herokuapp.com/weather/${city}`
-    );
-    const weather = await response.json();
-    return weather;
+    ___
 }
 
 
