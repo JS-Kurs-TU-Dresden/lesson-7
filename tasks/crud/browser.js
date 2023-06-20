@@ -1,29 +1,68 @@
-const tweets = [
-    {
-        id: 1,
-        text: 'I am learning JS',
-    },
-    {
-        id: 2,
-        text: 'I am learning JSa',
-    },
-]
+const tweets = []
 
-function onAdd(newTweet) {
+async function onAdd(newTweet) {
 
+    const response = await fetch('/tweets', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            text: newTweet
+        })
+    })
+
+    const resultTweet = await response.json()
+
+    tweets.push(resultTweet)
 }
 
-function onUpdate(id, newTweet) {
+async function onUpdate(id, newTweet) {
+    const response = await fetch(`/tweets/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            text: newTweet
+        })
+    })
 
+    const resultTweet = await response.json()
+
+    const tweetIndex = tweets.findIndex(t => t.id === id)
+    tweets[tweetIndex] = resultTweet
 }
 
-function onDelete(id) {
+async function onDelete(id) {
+    const response = await fetch(`/tweets/${id}`, {
+        method: 'DELETE'
+    })
 
+    if (response.status === 204) {
+        const tweetIndex = tweets.findIndex(t => t.id === id)
+        tweets.splice(tweetIndex, 1)
+    }
+}
+
+const response = await fetch('/tweets')
+const resultTweets = await response.json()
+
+for (const tweet of resultTweets) {
+    tweets.push(tweet)
 }
 
 const twitter = createTwitter(tweets, onUpdate, onDelete)
 
 twitter.renderTweets()
+
+document.getElementById('post-tweet').addEventListener('click', async () => {
+    const newTweet = document.getElementById('new-tweet-text').value
+
+    await onAdd(newTweet)
+    twitter.renderTweets()
+})
+
 
 
 
@@ -63,18 +102,17 @@ function createTwitter(tweets, onSave, onDelete) {
                 const article = document.createElement('article');
                 article.id = tweet.id;
 
-                const header = document.createElement('header');
-
                 const img = document.createElement('img');
-                img.src = 'https://thispersondoesnotexist.com/';
+                img.src = 'http://localhost:3000/logo.png';
 
                 const h3 = document.createElement('h3');
                 h3.textContent = 'John Doe';
 
-                header.appendChild(img);
-                header.appendChild(h3);
+                article.appendChild(img);
+                article.appendChild(h3);
 
-                article.appendChild(header);
+                const buttons = document.createElement('div');
+                buttons.classList.add('buttons');
 
                 if (this.editing === tweet.id) {
                     const textarea = document.createElement('textarea');
@@ -82,27 +120,29 @@ function createTwitter(tweets, onSave, onDelete) {
 
                     const button = document.createElement('button');
                     button.textContent = 'Save';
+                    button.classList.add('save');
 
-                    button.addEventListener('click', () => {
+                    button.addEventListener('click', async () => {
                         const newTweet = textarea.value;
 
-                        tweetIndex = tweets.findIndex(t => t.id === tweet.id);
+                        let tweetIndex = tweets.findIndex(t => t.id === tweet.id);
                         tweets[tweetIndex].text = newTweet;
+
+                        await onSave(tweet.id, newTweet);
 
                         this.editing = null;
                         this.renderTweets();
-
-                        onSave(tweet.id, newTweet);
                     });
 
                     article.appendChild(textarea);
-                    article.appendChild(button);
+                    buttons.appendChild(button);
                 } else {
                     const p = document.createElement('p');
                     p.textContent = tweet.text;
 
                     const button = document.createElement('button');
                     button.textContent = 'Edit';
+                    button.classList.add('edit');
 
                     button.addEventListener('click', () => {
                         this.editing = tweet.id;
@@ -110,21 +150,25 @@ function createTwitter(tweets, onSave, onDelete) {
                     });
 
                     article.appendChild(p);
-                    article.appendChild(button);
+                    buttons.appendChild(button);
                 }
 
                 const button = document.createElement('button');
                 button.textContent = 'Delete';
+                button.classList.add('delete');
 
-                button.addEventListener('click', () => {
+                button.addEventListener('click', async () => {
                     const tweetIndex = tweets.findIndex(t => t.id === tweet.id);
                     tweets.splice(tweetIndex, 1);
-                    this.renderTweets();
 
-                    onDelete(tweet.id);
+                    await onDelete(tweet.id);
+
+                    this.renderTweets();
                 });
 
-                article.appendChild(button);
+                buttons.appendChild(button);
+
+                article.appendChild(buttons);
 
                 document.getElementById('tweets').appendChild(article);
             }

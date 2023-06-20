@@ -12,6 +12,18 @@ async function getWeatherIn(city) {
     return weather;
 }
 
-console.log(await getWeatherIn('Dresden'))
 
-export { }
+
+
+
+
+
+
+
+
+
+
+
+
+
+export { getWeatherIn }

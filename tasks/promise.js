@@ -11,12 +11,28 @@ function fail() {
     return new Promise((_, reject) => setTimeout(reject, 1000));
 }
 
-// Write an async function that prints out all numbers from 1 to 10 with a delay of 1 second between each number
+// Write an async function that prints out all numbers from 1 to 10 with a delay of 250 milliseconds between each number
 
 async function printNumbers() {
     for (let i = 1; i <= 10; i++) {
         console.log(i);
-        await sleep(1000);
+        await sleep(250);
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+export {
+    sleep,
+    fail,
+    printNumbers
+}

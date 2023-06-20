@@ -12,36 +12,13 @@
 
         <main>
             <section id="new-tweet">
-                <form>
-                    <textarea name="tweet" placeholder="What's happening?" maxlength="120"></textarea>
-                    <button type="submit">Tweet</button>
-                </form>
+                <textarea id="new-tweet-text" placeholder="What's happening?" maxlength="120"></textarea>
+                <button id="post-tweet">Tweet</button>
             </section>
 
-            <section id="tweets">
-                <article>
-                    <header>
-                        <img src="https://thispersondoesnotexist.com/" />
-                        <h3>John Doe</h3>
-                    </header>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum, voluptate, quibusdam, quia voluptas quod quos voluptatem
-                        quas quidem quibusdam, quia voluptas quod quos voluptatem quas quidem.
-                    </p>
-                </article>
-                <article>
-                    <header>
-                        <img src="https://thispersondoesnotexist.com/" />
-                        <h3>John Doe</h3>
-                    </header>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum, voluptate, quibusdam, quia voluptas quod quos voluptatem
-                        quas quidem quibusdam, quia voluptas quod quos voluptatem quas quidem.
-                    </p>
-                </article>
-            </section>
+            <section id="tweets"></section>
         </main>
 
-        <script src="./browser.js"></script>
+        <script src="./browser.js" type="module"></script>
     </body>
 </html>
