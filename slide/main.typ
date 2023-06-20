@@ -351,8 +351,8 @@ console.log(myData)
 == Tasks and Points
 Goal is to get 100 Points.
 #columns(2, [
-- `basic-server` (50 Points)
 - `fetch` (25 Points)
 - `promise` (25 Points)
+- `basic-server` (50 Points)
 - `crud` (100 Points)
 ])
