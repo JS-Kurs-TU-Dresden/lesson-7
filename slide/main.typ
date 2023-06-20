@@ -351,11 +351,8 @@ console.log(myData)
 == Tasks and Points
 Goal is to get 100 Points.
 #columns(2, [
-- `custom-events` (20 Points)
-- `lists` (30 Points)
-- `form` (30 Points)
-- `tables` (40 Points)
-- `more-events` (40 Points)
-- `event-bubbling` (40 Points)
-- `friend-list` (80 Points)
+- `basic-server` (50 Points)
+- `fetch` (25 Points)
+- `promise` (25 Points)
+- `crud` (100 Points)
 ])
